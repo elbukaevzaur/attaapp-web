@@ -1,0 +1,32 @@
+[
+  {
+    "id": 370,
+    "name": "Умалатов Рамзан Дениевич",
+    "entity": "Сделки",
+    "product": "Iphone 16 pro max",
+    "source": "App store",
+    "price": 129000,
+    "contribution": 30000,
+    "sponsor": "Халидов Б.Г."
+  },
+  {
+    "id": 380,
+    "name": "Шарпудиев Магомед Хасанович",
+    "entity": "Сделки",
+    "product": "Iphone 16 pro max",
+    "source": "App store",
+    "price": 129000,
+    "contribution": 30000,
+    "sponsor": "Халидов Б.Г."
+  },
+  {
+    "id": 390,
+    "name": "Хамстханов Лом-Али Асланбекович",
+    "entity": "Сделки",
+    "product": "Iphone 16 pro max",
+    "source": "App store",
+    "price": 129000,
+    "contribution": 30000,
+    "sponsor": "Халидов Б.Г."
+  }
+]

@@ -1,0 +1,16 @@
+.sortHeader {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortHeader:hover {
+  color: #1976d2;
+}
+
+.sortIcon {
+  display: inline-flex;
+  color: #1976d2;
+}

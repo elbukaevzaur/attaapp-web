@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "name": "Отчет по сделкам",
+    "entity": "Сделки",
+    "type": "По умолчанию",
+    "showOnMain": true,
+    "showInMenu": true,
+    "showInTopMenu": false,
+    "hideRecordsCount": false,
+    "hideCounterIfEmpty": true,
+    "showAsCounterOnMain": true,
+    "autoUpdate": false
+  },
+  {
+    "id": 2,
+    "name": "Отчет по клиентам",
+    "entity": "Клиенты",
+    "type": "Счетчик",
+    "showOnMain": true,
+    "showInMenu": true,
+    "showInTopMenu": true,
+    "hideRecordsCount": false,
+    "hideCounterIfEmpty": false,
+    "showAsCounterOnMain": false,
+    "autoUpdate": true
+  }
+]

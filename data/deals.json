@@ -1,0 +1,41 @@
+[
+  {
+    "id": 370,
+    "clientName": "Умалатов Рамзан Дениевич",
+    "entity": "Сделки",
+    "product": "Iphone 16 pro max",
+    "source": "App store",
+    "price": 129000,
+    "contribution": 30000,
+    "investor": "Халидов Б.Г.",
+    "registrationDate": "2024-01-15",
+    "monthsCount": 6,
+    "payment": 99000
+  },
+  {
+    "id": 380,
+    "clientName": "Шарпудиев Магомед Хасанович",
+    "entity": "Сделки",
+    "product": "Iphone 16 pro max",
+    "source": "App store",
+    "price": 129000,
+    "contribution": 30000,
+    "investor": "Халидов Б.Г.",
+    "registrationDate": "2024-02-10",
+    "monthsCount": 6,
+    "payment": 99000
+  },
+  {
+    "id": 390,
+    "clientName": "Хамстханов Лом-Али Асланбекович",
+    "entity": "Сделки",
+    "product": "Iphone 16 pro max",
+    "source": "App store",
+    "price": 129000,
+    "contribution": 30000,
+    "investor": "Халидов Б.Г.",
+    "registrationDate": "2024-03-05",
+    "monthsCount": 6,
+    "payment": 99000
+  }
+]

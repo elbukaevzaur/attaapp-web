@@ -1,0 +1,92 @@
+.paymentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 12px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.infoItem {
+  display: flex;
+}
+
+.infoLabel {
+  width: 120px;
+  color: #666;
+}
+
+.infoValue {
+  font-weight: 500;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  color: #666;
+}
+
+.noHistory {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.historyItem {
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.historyDate {
+  font-size: 14px;
+  color: #666;
+}
+
+.historyType {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4285f4;
+}
+
+.historyMessage {
+  margin-bottom: 8px;
+}
+
+.historyFooter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.historyUser {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .infoItem {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .infoLabel {
+    width: 100%;
+  }
+}

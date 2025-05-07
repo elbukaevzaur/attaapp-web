@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "clientId": 370,
+    "date": "2024-01-20",
+    "amount": 30000,
+    "balance": 99000
+  },
+  {
+    "id": 2,
+    "clientId": 380,
+    "date": "2024-02-15",
+    "amount": 30000,
+    "balance": 99000
+  },
+  {
+    "id": 3,
+    "clientId": 390,
+    "date": "2024-03-10",
+    "amount": 30000,
+    "balance": 99000
+  }
+]

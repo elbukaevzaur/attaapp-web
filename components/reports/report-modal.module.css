@@ -1,0 +1,84 @@
+.reportModal {
+  max-width: 700px;
+}
+
+.formRow {
+  display: flex;
+  gap: 16px;
+}
+
+.formRow .form-group {
+  flex: 1;
+}
+
+.checkboxGroup {
+  margin-bottom: 20px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.checkboxLabel input {
+  margin-right: 8px;
+}
+
+.chartTypeSelector {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.chartTypeOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1;
+  transition: all 0.2s;
+}
+
+.chartTypeOption:hover {
+  background-color: #f5f5f5;
+}
+
+.chartTypeOption.selected {
+  background-color: #e3f2fd;
+  border-color: #90caf9;
+  color: #1976d2;
+}
+
+.chartTypeOption.selected svg {
+  color: #1976d2;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.submitBtn:hover {
+  background-color: #3b78e7;
+}
+
+@media (max-width: 768px) {
+  .formRow {
+    flex-direction: column;
+    gap: 0;
+  }
+}
