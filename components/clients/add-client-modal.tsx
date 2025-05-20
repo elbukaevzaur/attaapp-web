@@ -14,12 +14,8 @@ interface AddClientModalProps {
 const AddClientModal: React.FC<AddClientModalProps> = ({ onClose, onSave }) => {
   const [formData, setFormData] = useState<Partial<Client>>({
     name: "",
-    entity: "Сделки",
-    product: "",
-    source: "",
-    price: 0,
-    contribution: 0,
-    sponsor: "Халидов Б.Г.",
+    residence: '',
+    age: 0
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -33,7 +29,6 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ onClose, onSave }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     onSave({
-      id: Math.floor(Math.random() * 1000),
       ...(formData as Client),
     })
   }
@@ -50,7 +45,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ onClose, onSave }) => {
         <div className="modal-body">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label className="form-label">Имя</label>
+              <label className="form-label">ФИО</label>
               <input
                 type="text"
                 name="name"
@@ -62,31 +57,13 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ onClose, onSave }) => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Спонсор</label>
-              <select name="sponsor" className="form-control" value={formData.sponsor} onChange={handleChange}>
-                <option value="Халидов Б.Г.">Халидов Б.Г.</option>
-                <option value="Абасов Т.В.">Абасов Т.В.</option>
-                <option value="Другой спонсор">Другой спонсор</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Сущность</label>
-              <select name="entity" className="form-control" value={formData.entity} onChange={handleChange}>
-                <option value="Сделки">Сделки</option>
-                <option value="Товар">Товар</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Товар</label>
+              <label className="form-label">Возраст</label>
               <input
-                type="text"
-                name="product"
-                className="form-control"
-                value={formData.product}
-                onChange={handleChange}
-                required
+                  type="text"
+                  name="age"
+                  className="form-control"
+                  value={formData.age}
+                  onChange={handleChange}
               />
             </div>
 
@@ -94,39 +71,15 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ onClose, onSave }) => {
               <label className="form-label">Откуда</label>
               <input
                 type="text"
-                name="source"
+                name="residence"
                 className="form-control"
-                value={formData.source}
+                value={formData.residence}
                 onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Цена</label>
-              <input
-                type="number"
-                name="price"
-                className="form-control"
-                value={formData.price}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Взнос</label>
-              <input
-                type="number"
-                name="contribution"
-                className="form-control"
-                value={formData.contribution}
-                onChange={handleChange}
-                required
               />
             </div>
 
             <button type="submit" className={styles.submitBtn}>
-              Принять
+              Добавить
             </button>
           </form>
         </div>

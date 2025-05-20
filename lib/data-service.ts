@@ -1,4 +1,6 @@
 import type { Client, Report, Sponsor, Investment, Deal, Payment, ScheduledPayment, NotificationRecord } from "./types"
+import axiosInstance from "@/lib/http/axiosInstance";
+import {AxiosResponse} from "axios";
 
 // Mock data
 const clients: Client[] = [
@@ -331,17 +333,20 @@ const notificationHistory: NotificationRecord[] = [
 ]
 
 // Clients
-export async function getClients(): Promise<Client[]> {
-  return [...clients]
+export async function getClients(): Promise<AxiosResponse> {
+  return  axiosInstance.get('/clients');
 }
 
-export async function getClientById(id: number): Promise<Client | null> {
-  return clients.find((client) => client.id === id) || null
+export async function getClientById(id: number): Promise<AxiosResponse> {
+  return  axiosInstance.get(`/clients/${id}`);
 }
 
-export async function addClient(client: Client): Promise<Client[]> {
-  clients.push(client)
-  return [...clients]
+export async function addClient(client: Client): Promise<AxiosResponse> {
+  return axiosInstance.post('/clients', client);
+}
+
+export async function deleteClient(id: number): Promise<AxiosResponse> {
+  return axiosInstance.delete(`/clients/${id}`);
 }
 
 // Reports
@@ -379,31 +384,38 @@ export async function deleteReport(id: number): Promise<boolean> {
 }
 
 // Sponsors
-export async function getSponsors(): Promise<Sponsor[]> {
-  return [...sponsors]
+export async function getSponsors(): Promise<AxiosResponse> {
+  return axiosInstance.get('/sponsors')
 }
 
-export async function getSponsorById(id: number): Promise<Sponsor | null> {
-  return sponsors.find((sponsor) => sponsor.id === id) || null
+export async function deleteSponsor(sponsorId: number): Promise<AxiosResponse> {
+  return axiosInstance.delete(`/sponsors/${sponsorId}`)
 }
 
-export async function addSponsor(sponsor: Sponsor): Promise<Sponsor[]> {
-  sponsors.push(sponsor)
-  return [...sponsors]
+export async function getSponsorById(id: number): Promise<AxiosResponse> {
+  return axiosInstance.get(`/sponsors/${id}`)
+}
+
+export async function addSponsor(sponsor: Sponsor): Promise<AxiosResponse> {
+  return  axiosInstance.post('/sponsors', sponsor);
 }
 
 // Investments
-export async function getInvestments(): Promise<Investment[]> {
-  return [...investments]
+
+export async function getSponsorInvestmentsStat(sponsorId: number): Promise<AxiosResponse> {
+  return axiosInstance.get(`/investments/sponsor/statistics?sponsorId=${sponsorId}`)
 }
 
-export async function getSponsorInvestments(sponsorId: number): Promise<Investment[]> {
-  return investments.filter((investment) => investment.sponsorId === sponsorId)
+export async function getInvestmentsStat(investmentId: number): Promise<AxiosResponse> {
+  return axiosInstance.get(`/investments/statistics?investmentId=${investmentId}`)
 }
 
-export async function addInvestment(investment: Investment): Promise<Investment[]> {
-  investments.push(investment)
-  return investments.filter((inv) => inv.sponsorId === investment.sponsorId)
+export async function deleteInvestment(investmentId: number): Promise<AxiosResponse> {
+  return axiosInstance.delete(`/investments/${investmentId}`)
+}
+
+export async function addInvestment(investment: Investment): Promise<AxiosResponse> {
+  return axiosInstance.post('/investments', investment);
 }
 
 // Deals
@@ -411,36 +423,34 @@ export async function getDeals(): Promise<Deal[]> {
   return [...deals]
 }
 
-export async function getDealById(id: number): Promise<Deal | null> {
-  return deals.find((deal) => deal.id === id) || null
+export async function getDealById(id: number): Promise<AxiosResponse> {
+  return axiosInstance.get(`/deals/${id}`)
 }
 
-export async function getClientDeals(clientId: number): Promise<Deal[]> {
-  return deals.filter((deal) => deal.clientId === clientId)
+export async function getClientDeals(clientId: number): Promise<AxiosResponse> {
+  return axiosInstance.get(`/deals?clientId=${clientId}`)
+  // return axiosInstance.get(`/deals?clientId=${clientId}`)
 }
 
-export async function addDeal(deal: Deal): Promise<Deal[]> {
-  deals.push(deal)
-  return deals.filter((d) => d.clientId === deal.clientId)
+export async function createDeal(deal: Deal): Promise<AxiosResponse> {
+  return axiosInstance.post(`/deals`, deal);
 }
 
-// Payments
-export async function getPayments(): Promise<Payment[]> {
-  return [...payments]
+export async function getDealPayments(dealId: number): Promise<AxiosResponse> {
+  return axiosInstance.get(`/deal-payments?dealId=${dealId}`)
 }
 
-export async function getDealPayments(dealId: number): Promise<Payment[]> {
-  return payments.filter((payment) => payment.dealId === dealId)
+export async function createDealPayment(payment: Payment): Promise<AxiosResponse> {
+  return axiosInstance.post(`/deal-payments`, payment)
 }
 
-export async function addPayment(payment: Payment): Promise<Payment[]> {
-  payments.push(payment)
-  return payments.filter((p) => p.dealId === payment.dealId)
+export async function deleteDealPayment(id: number): Promise<AxiosResponse> {
+  return axiosInstance.delete(`/deal-payments/${id}`)
 }
 
 // Payment Schedule
-export async function getPaymentSchedule(): Promise<ScheduledPayment[]> {
-  return [...scheduledPayments]
+export async function getPaymentSchedule(body: {startDate: string, endDate: string}): Promise<AxiosResponse> {
+  return axiosInstance.post(`/payment-schedule`, body);
 }
 
 export async function getScheduledPayments(): Promise<ScheduledPayment[]> {

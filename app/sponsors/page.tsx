@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { Trash2, Edit, Plus, ExternalLink, Search } from "lucide-react"
 import styles from "./sponsors.module.css"
-import { getSponsors, addSponsor } from "@/lib/data-service"
+import {getSponsors, addSponsor, deleteSponsor} from "@/lib/data-service"
 import type { Sponsor } from "@/lib/types"
 import AddSponsorModal from "@/components/sponsors/add-sponsor-modal"
 import TableCard from "@/components/card-view/table-card"
@@ -20,17 +20,25 @@ export default function SponsorsPage() {
 
   useEffect(() => {
     const loadSponsors = async () => {
-      const data = await getSponsors()
-      setSponsors(data)
+      getSponsors().then((resp) => {
+        setSponsors(resp.data.data)
+      })
     }
 
     loadSponsors()
   }, [])
 
   const handleAddSponsor = async (sponsor: Sponsor) => {
-    const updatedSponsors = await addSponsor(sponsor)
-    setSponsors(updatedSponsors)
-    setIsModalOpen(false)
+    addSponsor(sponsor).then((resp) => {
+      setSponsors([...sponsors, resp.data])
+      setIsModalOpen(false)
+    })
+  }
+
+  const handleDeleteSponsor = (sponsorId: number) => {
+    deleteSponsor(sponsorId).then((resp) => {
+      setSponsors(sponsors.filter(f => f.id !== sponsorId))
+    })
   }
 
   const handleSort = (field: string) => {
@@ -63,8 +71,8 @@ export default function SponsorsPage() {
         comparison = a.email.localeCompare(b.email)
       } else if (sortField === "phone") {
         comparison = a.phone.localeCompare(b.phone)
-      } else if (sortField === "totalInvestment") {
-        comparison = a.totalInvestment - b.totalInvestment
+      } else if (sortField === "investmentAmount") {
+        comparison = a.investmentAmount - b.investmentAmount
       } else if (sortField === "id") {
         comparison = a.id - b.id
       }
@@ -79,7 +87,7 @@ export default function SponsorsPage() {
     { field: "name", label: "Имя" },
     { field: "phone", label: "Телефон" },
     { field: "email", label: "Email" },
-    { field: "totalInvestment", label: "Инвестиции" },
+    { field: "investmentAmount", label: "Инвестиции" },
   ]
 
   return (
@@ -112,7 +120,6 @@ export default function SponsorsPage() {
         <table className="table">
           <thead>
             <tr>
-              <th>Действие</th>
               <th onClick={() => handleSort("id")} className={styles.sortableHeader}>
                 <SortHeader
                   title="#"
@@ -158,14 +165,20 @@ export default function SponsorsPage() {
                   onSort={handleSort}
                 />
               </th>
+              <th>Действие</th>
             </tr>
           </thead>
           <tbody>
             {sortedSponsors.map((sponsor) => (
               <tr key={sponsor.id}>
+                <td>{sponsor.id}</td>
+                <td>{sponsor.name}</td>
+                <td>{sponsor.phone}</td>
+                <td>{sponsor.email}</td>
+                <td>{sponsor.investmentAmount} ₽</td>
                 <td>
                   <div className={styles.actions}>
-                    <button className={styles.actionBtn}>
+                    <button className={styles.actionBtn} onClick={() => handleDeleteSponsor(sponsor.id)}>
                       <Trash2 size={16} />
                     </button>
                     <button className={styles.actionBtn}>
@@ -176,11 +189,6 @@ export default function SponsorsPage() {
                     </Link>
                   </div>
                 </td>
-                <td>{sponsor.id}</td>
-                <td>{sponsor.name}</td>
-                <td>{sponsor.phone}</td>
-                <td>{sponsor.email}</td>
-                <td>{sponsor.totalInvestment} ₽</td>
               </tr>
             ))}
             {sortedSponsors.length === 0 && (
@@ -213,13 +221,13 @@ export default function SponsorsPage() {
               name: sponsor.name,
               phone: sponsor.phone,
               email: sponsor.email,
-              totalInvestment: `${sponsor.totalInvestment} ₽`,
+              investmentAmount: `${sponsor.investmentAmount} ₽`,
             }}
             columns={[
               { key: "name", title: "Имя" },
               { key: "phone", title: "Телефон" },
               { key: "email", title: "Email" },
-              { key: "totalInvestment", title: "Инвестиции" },
+              { key: "investmentAmount", title: "Инвестиции" },
             ]}
             actions={
               <div className={styles.cardActions}>

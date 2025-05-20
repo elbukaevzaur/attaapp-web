@@ -31,7 +31,7 @@ const MobileNavigation = () => {
         className={`${styles.navItem} ${isActive("/payment-schedule") ? styles.active : ""}`}
       >
         <Calendar size={20} />
-        <span>График платежей</span>
+        <span>График</span>
       </Link>
 
       <Link href="/sponsors" className={`${styles.navItem} ${isActive("/sponsors") ? styles.active : ""}`}>

@@ -14,9 +14,9 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <button className={styles.menuToggle} onClick={toggleMobileMenu}>
-        <Menu size={24} />
-      </button>
+      {/*<button className={styles.menuToggle} onClick={toggleMobileMenu}>*/}
+      {/*  <Menu size={24} />*/}
+      {/*</button>*/}
 
       <div className={styles.searchContainer}>
         <Search size={18} className={styles.searchIcon} />

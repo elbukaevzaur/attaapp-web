@@ -9,16 +9,14 @@ import type { Investment } from "@/lib/types"
 interface AddInvestmentModalProps {
   onClose: () => void
   onSave: (investment: Investment) => void
-  sponsorName: string
 }
 
-const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({ onClose, onSave, sponsorName }) => {
+const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({ onClose, onSave }) => {
   const [formData, setFormData] = useState<Partial<Investment>>({
     amount: "",
-    startDate: new Date().toISOString().split("T")[0],
-    endDate: "",
+    dateFrom: new Date().toISOString().split("T")[0],
+    dateTo: "",
     percentage: 20,
-    entity: "Сделки",
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -41,17 +39,16 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({ onClose, onSave
     e.preventDefault()
 
     // Calculate end date if not provided
-    let endDate = formData.endDate
-    if (!endDate && formData.startDate) {
-      const date = new Date(formData.startDate)
+    let endDate = formData.dateTo
+    if (!endDate && formData.dateFrom) {
+      const date = new Date(formData.dateFrom)
       date.setMonth(date.getMonth() + 6) // Default to 6 months
       endDate = date.toISOString().split("T")[0]
     }
 
     onSave({
-      id: Math.floor(Math.random() * 1000),
       ...(formData as Investment),
-      endDate: endDate || "",
+      dateTo: endDate || "",
     })
   }
 
@@ -66,10 +63,6 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({ onClose, onSave
         </div>
         <div className="modal-body">
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label className="form-label">Спонсор</label>
-              <input type="text" className="form-control" value={sponsorName} readOnly disabled />
-            </div>
 
             <div className="form-group">
               <label className="form-label">Сумма инвестиции</label>
@@ -88,9 +81,9 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({ onClose, onSave
               <label className="form-label">Дата начала</label>
               <input
                 type="date"
-                name="startDate"
+                name="dateFrom"
                 className="form-control"
-                value={formData.startDate}
+                value={formData.dateFrom}
                 onChange={handleChange}
                 required
               />
@@ -100,9 +93,9 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({ onClose, onSave
               <label className="form-label">Дата окончания</label>
               <input
                 type="date"
-                name="endDate"
+                name="dateTo"
                 className="form-control"
-                value={formData.endDate}
+                value={formData.dateTo}
                 onChange={handleChange}
               />
             </div>
@@ -119,14 +112,6 @@ const AddInvestmentModal: React.FC<AddInvestmentModalProps> = ({ onClose, onSave
                 min="1"
                 max="100"
               />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Сущность</label>
-              <select name="entity" className="form-control" value={formData.entity} onChange={handleChange}>
-                <option value="Сделки">Сделки</option>
-                <option value="Товар">Товар</option>
-              </select>
             </div>
 
             <button type="submit" className={styles.submitBtn}>

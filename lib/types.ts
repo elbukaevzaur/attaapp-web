@@ -1,12 +1,8 @@
 export interface Client {
   id: number
   name: string
-  entity: string
-  product: string
-  source: string
-  price: number
-  contribution: number
-  sponsor: string
+  age: number
+  residence: string
 }
 
 export interface Report {
@@ -34,50 +30,68 @@ export interface Sponsor {
   name: string
   phone: string
   email: string
-  totalInvestment: number
+  investmentAmount: number
 }
 
 export interface Investment {
   id: number
   sponsorId?: number
   amount: string
-  startDate: string
-  endDate: string
+  dateFrom: string
+  dateTo: string
   percentage: number
-  entity: string
+}
+
+export interface InvestmentStats {
+  id: number
+  amount?: number
+  dateFrom: string
+  dateTo: string
+  percentage: number
+  totalDeals: number
+  totalPayments: number
+  totalProfit: number
+  totalInvestorProfit: number
+  totalMoyProfit: number
+  totalInvestmentReturn: number
+  returnOfInvestmentPercentage: number
 }
 
 export interface Deal {
   id: number
+  productName: string
+  productOrigin: string
+  buyPrice: number
+  price: number
+  deposit: number
   clientId?: number
   clientName: string
-  entity: string
-  product: string
-  source: string
-  price: number
-  contribution: number
-  investor: string
+  sponsorId?: number
+  investmentId?: number
+  sponsorName?: string
   registrationDate: string
+  paymentDay: number
   monthsCount: number
-  payment: number
 }
 
 export interface Payment {
   id: number
   clientId: number
   dealId: number
-  date: string
+  paymentDate: string
   amount: number
   balance: number
 }
 
 export interface ScheduledPayment {
-  id: number
-  client: string
-  sponsor: string
+  dealId: number
+  productName: string
+  clientId: number
+  clientName: string
+  dueDate: string
   amount: number
-  date: string
-  isPaid: boolean
+  status: string
+  paymentDate: string
   isNotified: boolean
   notificationHistory?: NotificationRecord[]
 }

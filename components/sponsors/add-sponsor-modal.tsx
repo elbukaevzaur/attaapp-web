@@ -16,7 +16,6 @@ const AddSponsorModal: React.FC<AddSponsorModalProps> = ({ onClose, onSave }) =>
     name: "",
     phone: "",
     email: "",
-    totalInvestment: 0,
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +29,6 @@ const AddSponsorModal: React.FC<AddSponsorModalProps> = ({ onClose, onSave }) =>
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     onSave({
-      id: Math.floor(Math.random() * 1000),
       ...(formData as Sponsor),
     })
   }
@@ -77,18 +75,6 @@ const AddSponsorModal: React.FC<AddSponsorModalProps> = ({ onClose, onSave }) =>
                 name="email"
                 className="form-control"
                 value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Сумма инвестиций</label>
-              <input
-                type="number"
-                name="totalInvestment"
-                className="form-control"
-                value={formData.totalInvestment}
                 onChange={handleChange}
                 required
               />

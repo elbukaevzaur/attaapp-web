@@ -18,7 +18,7 @@ const AddPaymentModal: React.FC<AddPaymentModalProps> = ({ clientId, dealId, rem
   const [formData, setFormData] = useState<Partial<Payment>>({
     clientId,
     dealId,
-    date: new Date().toISOString().split("T")[0],
+    paymentDate: new Date().toISOString().split("T")[0],
     amount: 0,
     balance: remainingBalance,
   })
@@ -46,7 +46,6 @@ const AddPaymentModal: React.FC<AddPaymentModalProps> = ({ clientId, dealId, rem
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     onSave({
-      id: Math.floor(Math.random() * 1000),
       ...(formData as Payment),
     })
   }
@@ -66,9 +65,9 @@ const AddPaymentModal: React.FC<AddPaymentModalProps> = ({ clientId, dealId, rem
               <label className="form-label">Дата платежа</label>
               <input
                 type="date"
-                name="date"
+                name="paymentDate"
                 className="form-control"
-                value={formData.date}
+                value={formData.paymentDate}
                 onChange={handleChange}
                 required
               />
@@ -77,7 +76,7 @@ const AddPaymentModal: React.FC<AddPaymentModalProps> = ({ clientId, dealId, rem
             <div className="form-group">
               <label className="form-label">Сумма оплаты</label>
               <input
-                type="number"
+                type="text"
                 name="amount"
                 className="form-control"
                 value={formData.amount}

@@ -30,10 +30,13 @@ export default function PaymentSchedulePage() {
 
   useEffect(() => {
     const loadPayments = async () => {
-      const data = await getPaymentSchedule()
-      setPayments(data)
+      getPaymentSchedule({
+        startDate: "2025-02-14",
+        endDate: "2025-10-31"
+      }).then((resp) => {
+        setPayments(resp.data)
+      })
     }
-
     loadPayments()
   }, [])
 
@@ -47,10 +50,11 @@ export default function PaymentSchedulePage() {
   }
 
   const getPaymentStatus = (payment: ScheduledPayment) => {
-    if (payment.isPaid) return "paid"
+    if (payment.status === 'PAID') return "paid"
+    if (payment.status === 'UNPAID') return "UNPAID"
 
     const today = new Date()
-    const paymentDate = new Date(payment.date.split(".").reverse().join("-"))
+    const paymentDate = new Date(payment.paymentDate)
     const tomorrow = new Date(today)
     tomorrow.setDate(tomorrow.getDate() + 1)
 
@@ -62,6 +66,7 @@ export default function PaymentSchedulePage() {
   }
 
   const getStatusLabel = (status: string) => {
+    console.log(status)
     switch (status) {
       case "overdue":
         return "Просрочен"
@@ -90,7 +95,7 @@ export default function PaymentSchedulePage() {
 
   const handleSendNotification = async (type: string, message: string) => {
     if (selectedPayment) {
-      const updatedPayments = await markPaymentAsNotified(selectedPayment.id, type, message)
+      const updatedPayments = await markPaymentAsNotified(selectedPayment.dealId, type, message)
       setPayments(updatedPayments)
       setShowNotificationTypeModal(false)
     }
@@ -102,11 +107,11 @@ export default function PaymentSchedulePage() {
   }
 
   // Extract unique values for filters
-  const uniqueClients = useMemo(() => [...new Set(payments.map((p) => p.client))].sort(), [payments])
+  const uniqueClients = useMemo(() => [...new Set(payments.map((p) => p.clientId))].sort(), [payments])
 
-  const uniqueSponsors = useMemo(() => [...new Set(payments.map((p) => p.sponsor))].sort(), [payments])
+  // const uniqueSponsors = useMemo(() => [...new Set(payments.map((p) => p.sponsor))].sort(), [payments])
 
-  const uniqueDates = useMemo(() => [...new Set(payments.map((p) => p.date))].sort(), [payments])
+  const uniqueDates = useMemo(() => [...new Set(payments.map((p) => p.paymentDate))].sort(), [payments])
 
   const uniqueStatuses = useMemo(
     () => [...new Set(payments.map((p) => getStatusLabel(getPaymentStatus(p))))].sort(),
@@ -121,8 +126,7 @@ export default function PaymentSchedulePage() {
       // Apply search
       if (
         searchTerm &&
-        !payment.client.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        !payment.sponsor.toLowerCase().includes(searchTerm.toLowerCase())
+        !payment.clientName.toLowerCase().includes(searchTerm.toLowerCase())
       ) {
         return false
       }
@@ -132,17 +136,13 @@ export default function PaymentSchedulePage() {
         return false
       }
 
-      if (clientFilter.length > 0 && !clientFilter.includes(payment.client)) {
-        return false
-      }
-
-      if (sponsorFilter.length > 0 && !sponsorFilter.includes(payment.sponsor)) {
-        return false
-      }
-
-      if (dateFilter.length > 0 && !dateFilter.includes(payment.date)) {
-        return false
-      }
+      // if (clientFilter.length > 0 && !clientFilter.includes(payment.clientId)) {
+      //   return false
+      // }
+      //
+      // if (dateFilter.length > 0 && !dateFilter.includes(payment.paymentDate)) {
+      //   return false
+      // }
 
       return true
     })
@@ -153,17 +153,19 @@ export default function PaymentSchedulePage() {
     return [...filteredPayments].sort((a, b) => {
       let comparison = 0
 
-      if (sortField === "date") {
-        const dateA = new Date(a.date.split(".").reverse().join("-"))
-        const dateB = new Date(b.date.split(".").reverse().join("-"))
+      if (sortField === "dueDate") {
+        const dateA = new Date(a.dueDate.split(".").reverse().join("-"))
+        const dateB = new Date(b.dueDate.split(".").reverse().join("-"))
         comparison = dateA.getTime() - dateB.getTime()
       } else if (sortField === "amount") {
         comparison = a.amount - b.amount
       } else if (sortField === "client") {
-        comparison = a.client.localeCompare(b.client)
-      } else if (sortField === "sponsor") {
-        comparison = a.sponsor.localeCompare(b.sponsor)
-      } else if (sortField === "status") {
+        comparison = a.clientName.localeCompare(b.clientName)
+      }
+      // else if (sortField === "sponsor") {
+      //   comparison = a.sponsor.localeCompare(b.sponsor)
+      // }
+      else if (sortField === "status") {
         const statusA = getPaymentStatus(a)
         const statusB = getPaymentStatus(b)
         comparison = statusA.localeCompare(statusB)
@@ -234,18 +236,18 @@ export default function PaymentSchedulePage() {
                 selectedOptions={statusFilter}
                 onChange={setStatusFilter}
               />
-              <FilterDropdown
-                title="Клиент"
-                options={uniqueClients}
-                selectedOptions={clientFilter}
-                onChange={setClientFilter}
-              />
-              <FilterDropdown
-                title="Спонсор"
-                options={uniqueSponsors}
-                selectedOptions={sponsorFilter}
-                onChange={setSponsorsFilter}
-              />
+              {/*<FilterDropdown*/}
+              {/*  title="Клиент"*/}
+              {/*  options={uniqueClients}*/}
+              {/*  selectedOptions={clientFilter}*/}
+              {/*  onChange={setClientFilter}*/}
+              {/*/>*/}
+              {/*<FilterDropdown*/}
+              {/*  title="Спонсор"*/}
+              {/*  options={uniqueSponsors}*/}
+              {/*  selectedOptions={sponsorFilter}*/}
+              {/*  onChange={setSponsorsFilter}*/}
+              {/*/>*/}
               <FilterDropdown
                 title="Дата"
                 options={uniqueDates}
@@ -314,7 +316,7 @@ export default function PaymentSchedulePage() {
                   const status = getPaymentStatus(payment)
                   return (
                     <tr
-                      key={payment.id}
+                      key={payment.dealId + payment.dueDate}
                       className={`
                         ${status === "overdue" ? styles.overdueRow : ""}
                         ${status === "today" ? styles.todayRow : ""}
@@ -325,15 +327,16 @@ export default function PaymentSchedulePage() {
                       <td>
                         <span className={styles.statusBadge}>{getStatusLabel(status)}</span>
                       </td>
-                      <td>{payment.client}</td>
-                      <td>{payment.sponsor}</td>
+                      <td>{payment.clientName}</td>
+                      <td>{payment.productName}</td>
                       <td>{payment.amount} ₽</td>
-                      <td>{payment.date}</td>
+                      <td>{payment.dueDate}</td>
+                      <td>{payment.paymentDate}</td>
                       <td>
                         <button
-                          className={`${styles.actionIconBtn} ${payment.isPaid ? styles.actionActive : ""}`}
-                          onClick={() => handleMarkAsPaid(payment.id)}
-                          title={payment.isPaid ? "Отметить как неоплаченный" : "Отметить как оплаченный"}
+                          className={`${styles.actionIconBtn} ${payment.paymentDate ? styles.actionActive : ""}`}
+                          onClick={() => handleMarkAsPaid(payment.dealId)}
+                          title={payment.paymentDate ? "Отметить как неоплаченный" : "Отметить как оплаченный"}
                         >
                           <Check size={18} />
                         </button>
@@ -399,14 +402,14 @@ export default function PaymentSchedulePage() {
               const status = getPaymentStatus(payment)
               return (
                 <TableCard
-                  key={payment.id}
+                  key={payment.dealId + payment.dueDate}
                   data={{
                     status: getStatusLabel(status),
-                    client: payment.client,
-                    sponsor: payment.sponsor,
+                    client: payment.clientName,
+                    sponsor: payment.productName,
                     amount: `${payment.amount} ₽`,
-                    date: payment.date,
-                    isPaid: payment.isPaid,
+                    date: payment.dueDate,
+                    isPaid: payment.paymentDate,
                     isNotified: payment.isNotified,
                   }}
                   columns={[
@@ -431,7 +434,7 @@ export default function PaymentSchedulePage() {
                       render: (value) => (
                         <button
                           className={`${styles.actionIconBtn} ${value ? styles.actionActive : ""}`}
-                          onClick={() => handleMarkAsPaid(payment.id)}
+                          onClick={() => handleMarkAsPaid(payment.dealId)}
                         >
                           <Check size={18} />
                         </button>
@@ -509,8 +512,8 @@ export default function PaymentSchedulePage() {
         <NotificationTypeModal
           onClose={() => setShowNotificationTypeModal(false)}
           onSelect={handleSendNotification}
-          paymentId={selectedPayment.id}
-          clientName={selectedPayment.client}
+          paymentId={selectedPayment.dealId}
+          clientName={selectedPayment.clientName}
         />
       )}
     </div>

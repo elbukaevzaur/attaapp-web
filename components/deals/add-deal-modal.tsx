@@ -9,27 +9,27 @@ import type { Deal } from "@/lib/types"
 interface AddDealModalProps {
   onClose: () => void
   onSave: (deal: Deal) => void
-  clientName: string
 }
 
-const AddDealModal: React.FC<AddDealModalProps> = ({ onClose, onSave, clientName }) => {
+const AddDealModal: React.FC<AddDealModalProps> = ({ onClose, onSave }) => {
   const [formData, setFormData] = useState<Partial<Deal>>({
-    clientName,
-    entity: "Сделки",
-    product: "",
-    source: "",
+    productName: "",
+    productOrigin: "",
+    buyPrice: 0,
     price: 0,
-    contribution: 0,
-    investor: "Халидов Б.Г.",
+    deposit: 0,
+    sponsorName: "Халидов Б.Г.",
     registrationDate: new Date().toISOString().split("T")[0],
+    paymentDay: 1,
     monthsCount: 6,
-    payment: 0,
+    sponsorId: 1,
+    investmentId: 1
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
 
-    if (name === "price" || name === "contribution" || name === "monthsCount" || name === "payment") {
+    if (name === "price" || name === "buyPrice" || name === "deposit" || name === "monthsCount") {
       setFormData({
         ...formData,
         [name]: Number(value),
@@ -44,10 +44,7 @@ const AddDealModal: React.FC<AddDealModalProps> = ({ onClose, onSave, clientName
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onSave({
-      id: Math.floor(Math.random() * 1000),
-      ...(formData as Deal),
-    })
+    onSave(formData as Deal)
   }
 
   return (
@@ -61,51 +58,52 @@ const AddDealModal: React.FC<AddDealModalProps> = ({ onClose, onSave, clientName
         </div>
         <div className="modal-body">
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label className="form-label">Клиент</label>
-              <input type="text" className="form-control" value={clientName} readOnly disabled />
-            </div>
 
             <div className="form-group">
               <label className="form-label">Товар</label>
               <input
                 type="text"
-                name="product"
+                name="productName"
                 className="form-control"
-                value={formData.product}
+                value={formData.productName}
                 onChange={handleChange}
                 required
               />
             </div>
 
             <div className="form-group">
-              <label className="form-label">Сущность</label>
-              <select name="entity" className="form-control" value={formData.entity} onChange={handleChange}>
-                <option value="Сделки">Сделки</option>
-                <option value="Товар">Товар</option>
-              </select>
+              <label className="form-label">Магазин</label>
+              <input
+                  type="text"
+                  name="productOrigin"
+                  className="form-control"
+                  value={formData.productOrigin}
+                  onChange={handleChange}
+                  required
+              />
             </div>
 
             <div className="form-group">
-              <label className="form-label">Цена</label>
+              <label className="form-label">Цена покупки</label>
               <input
-                type="number"
+                  type="text"
+                  name="buyPrice"
+                  className="form-control"
+                  value={formData.buyPrice}
+                  onChange={handleChange}
+                  required
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Цена продажи</label>
+              <input
+                type="text"
                 name="price"
                 className="form-control"
                 value={formData.price}
                 onChange={handleChange}
                 required
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Откуда</label>
-              <input
-                type="text"
-                name="source"
-                className="form-control"
-                value={formData.source}
-                onChange={handleChange}
               />
             </div>
 
@@ -121,12 +119,25 @@ const AddDealModal: React.FC<AddDealModalProps> = ({ onClose, onSave, clientName
             </div>
 
             <div className="form-group">
+              <label className="form-label">День оплаты</label>
+              <input
+                  type="number"
+                  name="paymentDay"
+                  className="form-control"
+                  value={formData.paymentDay}
+                  onChange={handleChange}
+                  max={31}
+                  min={1}
+              />
+            </div>
+
+            <div className="form-group">
               <label className="form-label">Взнос</label>
               <input
                 type="number"
-                name="contribution"
+                name="deposit"
                 className="form-control"
-                value={formData.contribution}
+                value={formData.deposit}
                 onChange={handleChange}
               />
             </div>
@@ -143,18 +154,30 @@ const AddDealModal: React.FC<AddDealModalProps> = ({ onClose, onSave, clientName
             </div>
 
             <div className="form-group">
-              <label className="form-label">Оплата</label>
+              <label className="form-label">Sponsor ID</label>
               <input
-                type="number"
-                name="payment"
-                className="form-control"
-                value={formData.payment}
-                onChange={handleChange}
+                  type="number"
+                  name="sponsorId"
+                  className="form-control"
+                  value={formData.sponsorId}
+                  onChange={handleChange}
+              />
+            </div>
+
+
+            <div className="form-group">
+              <label className="form-label">Investment ID</label>
+              <input
+                  type="number"
+                  name="investmentId"
+                  className="form-control"
+                  value={formData.investmentId}
+                  onChange={handleChange}
               />
             </div>
 
             <button type="submit" className={styles.submitBtn}>
-              Принять
+              Добавить
             </button>
           </form>
         </div>
