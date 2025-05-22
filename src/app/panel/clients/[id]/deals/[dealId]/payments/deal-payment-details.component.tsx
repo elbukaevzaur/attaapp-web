@@ -66,7 +66,7 @@ export default function DealPaymentDetailsComponent(props: Props) {
     return (
         <div className={styles.container}>
             <div className={styles.breadcrumbs}>
-                <Link href="/clients" className={styles.breadcrumbLink}>
+                <Link href="/panel/clients" className={styles.breadcrumbLink}>
                     Клиенты
                 </Link>
                 <span className={styles.breadcrumbSeparator}>/</span>

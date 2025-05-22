@@ -46,7 +46,7 @@ export default function ClientDetailsComponent(props: Props) {
     return (
         <div className={styles.container}>
             <div className={styles.breadcrumbs}>
-                <Link href="/clients" className={styles.breadcrumbLink}>
+                <Link href="/panel/clients" className={styles.breadcrumbLink}>
                     <ArrowLeft size={16} />
                     <span>Клиенты</span>
                 </Link>

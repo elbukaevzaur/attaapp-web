@@ -14,8 +14,6 @@ export default async function middleware(req: NextRequest) {
         }
     }
 
-    console.log("hello world")
-
     if (((path.startsWith("/panel") || path === "/") && !token?.value) ||
         ((path.startsWith("/panel") || path === "/") && userRole !== 'ROLE_ADMIN')) {
         return NextResponse.redirect(new URL('/login', req.nextUrl));
