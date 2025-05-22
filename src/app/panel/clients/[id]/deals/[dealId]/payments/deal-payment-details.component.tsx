@@ -70,7 +70,7 @@ export default function DealPaymentDetailsComponent(props: Props) {
                     Клиенты
                 </Link>
                 <span className={styles.breadcrumbSeparator}>/</span>
-                <Link href={`/src/app/panel/clients/${clientId}/deals`} className={styles.breadcrumbLink}>
+                <Link href={`/panel/clients/${clientId}/deals`} className={styles.breadcrumbLink}>
                     {client.name}
                 </Link>
                 <span className={styles.breadcrumbSeparator}>/</span>

@@ -174,7 +174,7 @@ export default function ClientsPage() {
                     <button className={styles.actionBtn}>
                       <Edit size={16} />
                     </button>
-                    <Link href={`/src/app/panel/clients/${client.id}/deals`} className={styles.actionBtn}>
+                    <Link href={`/panel/clients/${client.id}/deals`} className={styles.actionBtn}>
                       <ExternalLink size={16} />
                     </Link>
                   </div>
@@ -225,7 +225,7 @@ export default function ClientsPage() {
                 <button className={styles.actionBtn}>
                   <Edit size={16} />
                 </button>
-                <Link href={`/src/app/panel/clients/${client.id}/deals`} className={styles.actionBtn}>
+                <Link href={`/panel/clients/${client.id}/deals`} className={styles.actionBtn}>
                   <ExternalLink size={16} />
                 </Link>
               </div>

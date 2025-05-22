@@ -109,7 +109,7 @@ export default function ClientDetailsComponent(props: Props) {
                                     <button className={styles.actionBtn}>
                                         <Edit size={16} />
                                     </button>
-                                    <Link href={`/src/app/panel/clients/${clientId}/deals/${deal.id}/payments`} className={styles.actionBtn}>
+                                    <Link href={`/panel/clients/${clientId}/deals/${deal.id}/payments`} className={styles.actionBtn}>
                                         <Plus size={16} />
                                     </Link>
                                 </div>
