@@ -27,8 +27,8 @@ COPY package*.json ./
 RUN npm install --production
 
 # Копируем собранное приложение
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
+COPY --from=builder /src/app/.next ./.next
+COPY --from=builder /src/app/public ./public
 
 # Устанавливаем переменные окружения
 ENV NODE_ENV=production

@@ -1,0 +1,377 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.profileCard {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  grid-column: 1 / 3;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.profileAvatar {
+  position: relative;
+  margin-right: 24px;
+}
+
+.profileAvatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.changeAvatarBtn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #4285f4;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.profileInfo {
+  flex: 1;
+}
+
+.profileName {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.profileRole {
+  color: #666;
+  font-size: 16px;
+}
+
+.profileDetails {
+  padding: 24px;
+}
+
+.detailGroup {
+  margin-bottom: 32px;
+}
+
+.detailTitle {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.detailRow {
+  display: flex;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.detailLabel {
+  width: 150px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detailValue {
+  flex: 1;
+  font-weight: 500;
+}
+
+.bioText {
+  line-height: 1.6;
+  color: #333;
+}
+
+.editInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.editTextarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.statsSection,
+.activitiesSection,
+.tasksSection,
+.documentsSection {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.statCard {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  border-left: 4px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.statValue {
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  color: #666;
+  font-size: 14px;
+}
+
+.activitiesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.activityItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.activityDate {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.activityContent {
+  display: flex;
+  align-items: flex-start;
+}
+
+.activityDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #4285f4;
+  margin-right: 8px;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.activityText {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.tasksList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.taskItem {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.taskTitle {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.taskPriority {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.highPriority {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.mediumPriority {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #ff9800;
+}
+
+.lowPriority {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.taskDeadline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #666;
+}
+
+.addTaskBtn,
+.addDocumentBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  background-color: #f5f5f5;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.addTaskBtn:hover,
+.addDocumentBtn:hover {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.documentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.documentItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+@media (max-width: 1024px) {
+  .profileGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .profileCard {
+    grid-column: 1;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .profileHeader {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profileAvatar {
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+
+  .detailRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detailLabel {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .editInput,
+  .editTextarea {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profileSignOutButton {
+  font-size: 15px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 10px;
+}
