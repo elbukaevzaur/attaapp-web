@@ -5,8 +5,8 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { X } from "lucide-react"
 import styles from "./notification-history-modal.module.css"
-import { getNotificationHistory } from "@/src/lib/data-service"
-import type { ScheduledPayment, NotificationRecord } from "@/src/lib/types"
+import { getNotificationHistory } from "@/lib/data-service"
+import type { ScheduledPayment, NotificationRecord } from "@/lib/types"
 
 interface NotificationHistoryModalProps {
   payment: ScheduledPayment
@@ -41,7 +41,7 @@ const NotificationHistoryModal: React.FC<NotificationHistoryModalProps> = ({ pay
           <div className={styles.paymentInfo}>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>Клиент:</span>
-              <span className={styles.infoValue}>{payment.client}</span>
+              <span className={styles.infoValue}>{payment.clientName}</span>
             </div>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>Сумма:</span>
@@ -49,7 +49,7 @@ const NotificationHistoryModal: React.FC<NotificationHistoryModalProps> = ({ pay
             </div>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>Дата платежа:</span>
-              <span className={styles.infoValue}>{payment.date}</span>
+              <span className={styles.infoValue}>{payment.dueDate}</span>
             </div>
           </div>
 

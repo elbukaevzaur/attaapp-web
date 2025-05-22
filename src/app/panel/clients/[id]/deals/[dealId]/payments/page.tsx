@@ -1,4 +1,4 @@
-import DealPaymentDetailsComponent from "@/src/app/panel/clients/[id]/deals/[dealId]/payments/deal-payment-details.component";
+import DealPaymentDetailsComponent from "@/app/panel/clients/[id]/deals/[dealId]/payments/deal-payment-details.component";
 
 type tParams = Promise<{ id: string, dealId: string }>;
 

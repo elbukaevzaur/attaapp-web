@@ -4,9 +4,9 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Trash2, Edit, Plus } from "lucide-react"
 import styles from "./deal-payments.module.css"
-import {getClientById, getDealById, getDealPayments, createDealPayment, deleteDealPayment} from "@/src/lib/data-service"
-import type { Client, Deal, Payment } from "@/src/lib/types"
-import AddPaymentModal from "@/src/components/clients/add-payment-modal"
+import {getClientById, getDealById, getDealPayments, createDealPayment, deleteDealPayment} from "@/lib/data-service"
+import type { Client, Deal, Payment } from "@/lib/types"
+import AddPaymentModal from "@/components/clients/add-payment-modal"
 import moment from "moment";
 
 interface Props {

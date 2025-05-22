@@ -1,4 +1,4 @@
-import ClientDetailsComponent from "@/src/app/panel/clients/[id]/deals/client-details.component";
+import ClientDetailsComponent from "@/app/panel/clients/[id]/deals/client-details.component";
 
 type tParams = Promise<{ id: string }>;
 

@@ -18,8 +18,8 @@ import {
   LogOut
 } from "lucide-react"
 import styles from "./profile.module.css"
-import {useAppDispatch} from "@/src/lib/hooks";
-import {SIGN_OUT} from "@/src/lib/reducers";
+import {useAppDispatch} from "@/lib/hooks";
+import {SIGN_OUT} from "@/lib/reducers";
 import {useRouter} from "next/navigation";
 
 export default function ProfilePage() {

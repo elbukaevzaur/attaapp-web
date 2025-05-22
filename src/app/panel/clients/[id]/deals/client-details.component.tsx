@@ -4,9 +4,9 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Trash2, Edit, Plus, ArrowLeft } from "lucide-react"
 import styles from "./client-deals.module.css"
-import {getClientById, getClientDeals, createDeal} from "@/src/lib/data-service"
-import type { Client, Deal } from "@/src/lib/types"
-import AddDealModal from "@/src/components/deals/add-deal-modal"
+import {getClientById, getClientDeals, createDeal} from "@/lib/data-service"
+import type { Client, Deal } from "@/lib/types"
+import AddDealModal from "@/components/deals/add-deal-modal"
 
 interface Props {
     clientId: number

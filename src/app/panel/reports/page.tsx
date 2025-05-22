@@ -15,12 +15,12 @@ import {
   ArrowDown,
 } from "lucide-react"
 import styles from "./reports.module.css"
-import { getReports, deleteReport } from "@/src/lib/data-service"
-import type { Report } from "@/src/lib/types"
-import TableCard from "@/src/components/card-view/table-card"
-import ReportModal from "@/src/components/reports/report-modal"
-import ReportViewModal from "@/src/components/reports/report-view-modal"
-import SortHeader from "@/src/components/filter-sort/sort-header"
+import { getReports, deleteReport } from "@/lib/data-service"
+import type { Report } from "@/lib/types"
+import TableCard from "@/components/card-view/table-card"
+import ReportModal from "@/components/reports/report-modal"
+import ReportViewModal from "@/components/reports/report-view-modal"
+import SortHeader from "@/components/filter-sort/sort-header"
 
 export default function ReportsPage() {
   const [reports, setReports] = useState<Report[]>([])

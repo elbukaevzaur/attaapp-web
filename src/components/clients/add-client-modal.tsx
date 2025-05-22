@@ -4,7 +4,7 @@ import type React from "react"
 import { useState } from "react"
 import { X } from "lucide-react"
 import styles from "./add-client-modal.module.css"
-import type { Client } from "@/src/lib/types"
+import type { Client } from "@/lib/types"
 
 interface AddClientModalProps {
   onClose: () => void

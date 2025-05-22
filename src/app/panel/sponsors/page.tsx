@@ -4,12 +4,12 @@ import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { Trash2, Edit, Plus, ExternalLink, Search } from "lucide-react"
 import styles from "./sponsors.module.css"
-import {getSponsors, addSponsor, deleteSponsor} from "@/src/lib/data-service"
-import type { Sponsor } from "@/src/lib/types"
-import AddSponsorModal from "@/src/components/sponsors/add-sponsor-modal"
-import TableCard from "@/src/components/card-view/table-card"
-import SortHeader from "@/src/components/filter-sort/sort-header"
-import SortDropdown from "@/src/components/filter-sort/sort-dropdown"
+import {getSponsors, addSponsor, deleteSponsor} from "@/lib/data-service"
+import type { Sponsor } from "@/lib/types"
+import AddSponsorModal from "@/components/sponsors/add-sponsor-modal"
+import TableCard from "@/components/card-view/table-card"
+import SortHeader from "@/components/filter-sort/sort-header"
+import SortDropdown from "@/components/filter-sort/sort-dropdown"
 
 export default function SponsorsPage() {
   const [sponsors, setSponsors] = useState<Sponsor[]>([])
@@ -71,8 +71,6 @@ export default function SponsorsPage() {
         comparison = a.email.localeCompare(b.email)
       } else if (sortField === "phone") {
         comparison = a.phone.localeCompare(b.phone)
-      } else if (sortField === "investmentAmount") {
-        comparison = a.investmentAmount - b.investmentAmount
       } else if (sortField === "id") {
         comparison = a.id - b.id
       }
@@ -175,7 +173,6 @@ export default function SponsorsPage() {
                 <td>{sponsor.name}</td>
                 <td>{sponsor.phone}</td>
                 <td>{sponsor.email}</td>
-                <td>{sponsor.investmentAmount} ₽</td>
                 <td>
                   <div className={styles.actions}>
                     <button className={styles.actionBtn} onClick={() => handleDeleteSponsor(sponsor.id)}>
@@ -221,13 +218,11 @@ export default function SponsorsPage() {
               name: sponsor.name,
               phone: sponsor.phone,
               email: sponsor.email,
-              investmentAmount: `${sponsor.investmentAmount} ₽`,
             }}
             columns={[
               { key: "name", title: "Имя" },
               { key: "phone", title: "Телефон" },
               { key: "email", title: "Email" },
-              { key: "investmentAmount", title: "Инвестиции" },
             ]}
             actions={
               <div className={styles.cardActions}>

@@ -10,9 +10,9 @@ import {
     getSponsorInvestmentsStat,
     getInvestmentsStat,
     deleteInvestment
-} from "@/src/lib/data-service"
-import {Sponsor, Investment, InvestmentStats} from "@/src/lib/types"
-import AddInvestmentModal from "@/src/components/sponsors/add-investment-modal"
+} from "@/lib/data-service"
+import {Sponsor, Investment, InvestmentStats} from "@/lib/types"
+import AddInvestmentModal from "@/components/sponsors/add-investment-modal"
 
 interface Props {
     sponsorId: number
@@ -115,7 +115,7 @@ export default function SponsorInvestmentsComponent(props: Props) {
                 </div>
                 <div className={styles.infoItem}>
                     <span className={styles.infoLabel}>Всего инвестиций:</span>
-                    <span className={styles.infoValue}>{sponsor.investmentAmount} ₽</span>
+                    <span className={styles.infoValue}>test ₽</span>
                 </div>
             </div>
 

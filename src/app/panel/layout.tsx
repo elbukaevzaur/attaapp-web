@@ -1,8 +1,8 @@
 import type React from "react"
 import { Inter } from "next/font/google"
-import Sidebar from "@/src/components/sidebar/sidebar"
-import Header from "@/src/components/header/header"
-import MobileNavigation from "@/src/components/mobile-navigation/mobile-navigation"
+import Sidebar from "@/components/sidebar/sidebar"
+import Header from "@/components/header/header"
+import MobileNavigation from "@/components/mobile-navigation/mobile-navigation"
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] })
 

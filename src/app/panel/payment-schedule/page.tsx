@@ -3,14 +3,14 @@
 import { useState, useEffect, useMemo } from "react"
 import { Trash2, Edit, Plus, Calendar, Bell, Check, Search, X } from "lucide-react"
 import styles from "./payment-schedule.module.css"
-import { getPaymentSchedule, markPaymentAsPaid, markPaymentAsNotified } from "@/src/lib/data-service"
-import type { ScheduledPayment } from "@/src/lib/types"
-import NotificationHistoryModal from "@/src/components/payment-schedule/notification-history-modal"
-import NotificationTypeModal from "@/src/components/notification/notification-type-modal"
-import TableCard from "@/src/components/card-view/table-card"
-import FilterDropdown from "@/src/components/filter-sort/filter-dropdown"
-import SortHeader from "@/src/components/filter-sort/sort-header"
-import SortDropdown from "@/src/components/filter-sort/sort-dropdown"
+import { getPaymentSchedule, markPaymentAsPaid, markPaymentAsNotified } from "@/lib/data-service"
+import type { ScheduledPayment } from "@/lib/types"
+import NotificationHistoryModal from "@/components/payment-schedule/notification-history-modal"
+import NotificationTypeModal from "@/components/notification/notification-type-modal"
+import TableCard from "@/components/card-view/table-card"
+import FilterDropdown from "@/components/filter-sort/filter-dropdown"
+import SortHeader from "@/components/filter-sort/sort-header"
+import SortDropdown from "@/components/filter-sort/sort-dropdown"
 
 export default function PaymentSchedulePage() {
   const [payments, setPayments] = useState<ScheduledPayment[]>([])

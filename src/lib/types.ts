@@ -8,7 +8,6 @@ export interface Client {
 export interface Report {
   id: number
   name: string
-  entity: string
   type: string
   showOnMain: boolean
   showInMenu: boolean
@@ -30,7 +29,6 @@ export interface Sponsor {
   name: string
   phone: string
   email: string
-  investmentAmount: number
 }
 
 export interface Investment {
@@ -84,6 +82,7 @@ export interface Payment {
 }
 
 export interface ScheduledPayment {
+  id: number,
   dealId: number
   productName: string
   clientId: number

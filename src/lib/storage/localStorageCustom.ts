@@ -1,5 +1,5 @@
-import {removeTokenCookie, setTokenCookie} from "@/src/lib/storage/cookies";
-import {authStorageKey} from "@/src/lib/config";
+import {removeTokenCookie, setTokenCookie} from "@/lib/storage/cookies";
+import {authStorageKey} from "@/lib/config";
 
 export const saveToLocalStorage = (value: any, key: string) => {
     try {

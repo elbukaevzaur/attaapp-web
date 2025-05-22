@@ -3,9 +3,9 @@
 import { User, Lock } from "lucide-react"
 import styles from "./login.module.css"
 import { useState, useEffect } from "react"
-import {useAppDispatch, useAppSelector} from "@/src/lib/hooks";
+import {useAppDispatch, useAppSelector} from "@/lib/hooks";
 import {useRouter} from "next/navigation";
-import {SIGN_IN_REQUEST} from "@/src/lib/reducers";
+import {SIGN_IN_REQUEST} from "@/lib/reducers";
 
 export default function LoginPage() {
     const [login, setLogin] = useState("")

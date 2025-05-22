@@ -4,12 +4,12 @@ import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { Trash2, Edit, Plus, ExternalLink, Search } from "lucide-react"
 import styles from "./clients.module.css"
-import AddClientModal from "@/src/components/clients/add-client-modal"
-import {getClients, addClient, deleteClient} from "@/src/lib/data-service"
-import type { Client } from "@/src/lib/types"
-import TableCard from "@/src/components/card-view/table-card"
-import SortHeader from "@/src/components/filter-sort/sort-header"
-import SortDropdown from "@/src/components/filter-sort/sort-dropdown"
+import AddClientModal from "@/components/clients/add-client-modal"
+import {getClients, addClient, deleteClient} from "@/lib/data-service"
+import type { Client } from "@/lib/types"
+import TableCard from "@/components/card-view/table-card"
+import SortHeader from "@/components/filter-sort/sort-header"
+import SortDropdown from "@/components/filter-sort/sort-dropdown"
 
 export default function ClientsPage() {
   const [clients, setClients] = useState<Client[]>([])

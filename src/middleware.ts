@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import {authStorageKey} from "@/src/lib/config";
+import {authStorageKey} from "@/lib/config";
 
 export default async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname
