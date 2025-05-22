@@ -72,7 +72,7 @@ export default function SponsorInvestmentsComponent(props: Props) {
     return (
         <div className={styles.container}>
             <div className={styles.breadcrumbs}>
-                <Link href="/sponsors" className={styles.breadcrumbLink}>
+                <Link href="/panel/sponsors" className={styles.breadcrumbLink}>
                     <ArrowLeft size={16} />
                     <span>Спонсоры</span>
                 </Link>
